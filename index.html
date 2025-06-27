@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Etiquetas Escolares 2025</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f0ff; /* Fondo general lila muy suave */
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Estilo para los destellos de fondo (más aesthetic) */
+        .background-smiley {
+            position: absolute;
+            font-size: 10em;
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 0;
+            user-select: none;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.03);
+        }
+        .smiley-pink { color: #f8bbd0; }
+        .smiley-lila { color: #e0c8f5; }
+        .smiley-celeste { color: #b0e0e6; }
+
+        /* Posiciones aleatorias para los destellos (puedes ajustarlas) */
+        .smiley-1 { top: 10%; left: 5%; transform: rotate(15deg); }
+        .smiley-2 { top: 25%; right: 10%; transform: rotate(-20deg); }
+        .smiley-3 { top: 40%; left: 15%; transform: rotate(10deg); }
+        .smiley-4 { top: 55%; right: 5%; transform: rotate(-10deg); }
+        .smiley-5 { top: 70%; left: 8%; transform: rotate(25deg); }
+        .smiley-6 { top: 85%; right: 12%; transform: rotate(-15deg); }
+        .smiley-7 { top: 5%; right: 20%; transform: rotate(5deg); }
+        .smiley-8 { top: 30%; left: 25%; transform: rotate(-5deg); }
+
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            font-family: 'Arial', sans-serif; /* Volvemos a Arial para el título principal */
+            color: #a777d9;
+            margin-bottom: 25px;
+            font-size: 2.8em; /* Mantenemos un tamaño un poco más grande */
+        }
+        p {
+            font-size: 1.1em;
+            color: #555;
+        }
+        .package {
+            border: 1px solid #e0c8f5;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            background-color: #fffafc;
+            text-align: left;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .package:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .package h2 {
+            color: #d99cd9;
+            margin-top: 0;
+            font-size: 2em;
+            border-bottom: 2px solid #b0e0e6;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .label-size-item {
+            cursor: pointer;
+            font-weight: bold;
+            color: #6a5acd;
+            margin-bottom: 5px;
+            transition: color 0.2s ease;
+            display: inline-block;
+            padding-right: 15px;
+            position: relative;
+            tabindex="0";
+            /* **IMPORTANTE PARA MÓVILES:** Asegurarse de que el área de toque sea suficiente */
+            -webkit-tap-highlight-color: transparent; /* Opcional: quita el resaltado azul al tocar en iOS */
+        }
+        .label-size-item::after {
+            content: '▼';
+            font-size: 0.7em;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease;
+        }
+        .label-size-item.expanded::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        .label-size-item:hover {
+            color: #483d8b;
+        }
+        .label-description {
+            display: none;
+            font-size: 0.95em;
+            color: #777;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            padding-left: 10px;
+            border-left: 3px solid #b0e0e6;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .label-description.visible-description {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+
+        .package ul {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+        .package ul li {
+            margin-bottom: 8px;
+            font-size: 1.1em;
+            line-height: 1.4;
+            color: #666;
+        }
+        .package .price {
+            font-size: 2.5em;
+            color: #e6a7c3;
+            font-weight: bold;
+            margin-top: 15px;
+            text-align: right;
+        }
+        .whatsapp-button {
+            display: inline-block;
+            background-color: #92d1f3;
+            color: white;
+            padding: 18px 35px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.6em;
+            font-weight: bold;
+            border-radius: 50px;
+            margin-top: 40px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .whatsapp-button:hover {
+            background-color: #7abfe7;
+            transform: translateY(-2px);
+        }
+        .whatsapp-button:active {
+            transform: translateY(0);
+        }
+        .contact-info {
+            margin-top: 40px;
+            font-size: 1.1em;
+            color: #555;
+        }
+        .contact-info a {
+            color: #7b9fd9;
+            text-decoration: none;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-smiley smiley-1 smiley-pink">✨</div>
+    <div class="background-smiley smiley-2 smiley-lila">✨</div>
+    <div class="background-smiley smiley-3 smiley-celeste">✨</div>
+    <div class="background-smiley smiley-4 smiley-pink">✨</div>
+    <div class="background-smiley smiley-5 smiley-lila">✨</div>
+    <div class="background-smiley smiley-6 smiley-celeste">✨</div>
+    <div class="background-smiley smiley-7 smiley-pink">✨</div>
+    <div class="background-smiley smiley-8 smiley-lila">✨</div>
+
+
+    <div class="container">
+        <h1>¡Personaliza el Regreso a Clases!</h1>
+        <p>Descubre nuestros paquetes de etiquetas escolares para un inicio de año único y organizado. ¡Calidad y estilo garantizados!</p>
+
+        <div class="package">
+            <h2>PAQUETE 1</h2>
+            <ul>
+                <li>
+                    <span class="label-size-item" data-description-id="desc1">22 Etiquetas de 5 x 9 cm</span>
+                    <p class="label-description" id="desc1">Ideales para libros, libretas y cuadernos grandes.</p>
+                </li>
+                <li>
+                    <span class="label-size-item" data-description-id="desc2">12 Etiquetas de 4 x 4 cm</span>
+                    <p class="label-description" id="desc2">Perfectas para útiles escolares como resistol, reglas, sacapuntas, tijeras y envases pequeños.</p>
+                </li>
+                <li>
+                    <span class="label-size-item" data-description-id="desc3">65 Etiquetas de 1.5 x 9 cm</span>
+                    <p class="label-description" id="desc3">Diseñadas para lápices, colores, plumas, marcadores y objetos delgados.</p>
+                </li>
+            </ul>
+            <div class="price">\$150 MXN</div>
+        </div>
+
+        <div class="package">
+            <h2>PAQUETE 2</h2>
+            <ul>
+                <li>
+                    <span class="label-size-item" data-description-id="desc4">44 Etiquetas de 5 x 9 cm</span>
+                    <p class="label-description" id="desc4">Ideales para libros, libretas y cuadernos grandes.</p>
+                </li>
+                <li>
+                    <span class="label-size-item" data-description-id="desc5">12 Etiquetas de 4 x 4 cm</span>
+                    <p class="label-description" id="desc5">Perfectas para útiles escolares como resistol, reglas, sacapuntas, tijeras y envases pequeños.</p>
+                </li>
+                <li>
+                    <span class="label-size-item" data-description-id="desc6">65 Etiquetas de 1.5 x 9 cm</span>
+                    <p class="label-description" id="desc6">Diseñadas para lápices, colores, plumas, marcadores y objetos delgados.</p>
+                </li>
+            </ul>
+            <div class="price">\$195 MXN</div>
+        </div>
+
+        <div class="package">
+            <h2>PAQUETE 3</h2>
+            <ul>
+                <li>
+                    <span class="label-size-item" data-description-id="desc7">44 Etiquetas de 5 x 9 cm</span>
+                    <p class="label-description" id="desc7">Ideales para libros, libretas y cuadernos grandes.</p>
+                </li>
+            </ul>
+            <div class="price">\$175 MXN</div>
+        </div>
+
+        <a href="https://wa.me/528121469893?text=Hola!%20Me%20interesan%20sus%20paquetes%20de%20etiquetas%20escolares." target="_blank" class="whatsapp-button">
+            ¡Haz tu Pedido por WhatsApp!
+        </a>
+
+        <div class="contact-info">
+            <p>¿Tienes preguntas? Contáctanos:</p>
+            <p>Teléfono: <a href="tel:+528121469893">8121469893</a></p>
+            <p>¡Será un gusto atenderte!</p>
+        </div>
+    </div>
+
+    <script>
+        // Función para alternar la visibilidad de la descripción
+        function toggleDescription(element, id) {
+            const description = document.getElementById(id);
+            const isVisible = description.classList.contains('visible-description');
+
+            // Cierra todas las descripciones abiertas en el mismo paquete, excepto la actual
+            const parentUl = element.closest('ul');
+            if (parentUl) {
+                const allDescriptionsInPackage = parentUl.querySelectorAll('.label-description.visible-description');
+                allDescriptionsInPackage.forEach(desc => {
+                    if (desc.id !== id) {
+                        desc.classList.remove('visible-description');
+                        const correspondingSpan = parentUl.querySelector(`.label-size-item[data-description-id="${desc.id}"]`);
+                        if (correspondingSpan) {
+                            correspondingSpan.classList.remove('expanded');
+                            correspondingSpan.style.color = '#6a5acd'; // Vuelve al color original
+                        }
+                    }
+                });
+            }
+
+            // Alterna la visibilidad de la descripción clickeada
+            if (isVisible) {
+                description.classList.remove('visible-description');
+                element.style.color = '#6a5acd'; // Vuelve al color original
+                element.classList.remove('expanded');
+            } else {
+                description.classList.add('visible-description');
+                element.style.color = '#d99cd9'; // Cambia a rosa pastel al expandir
+                element.classList.add('expanded');
+            }
+        }
+
+        // Asigna los eventos de clic a cada elemento de tamaño de etiqueta cuando la página carga
+        document.addEventListener('DOMContentLoaded', function() {
+            const labelSizeItems = document.querySelectorAll('.label-size-item');
+            labelSizeItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const descriptionId = this.getAttribute('data-description-id');
+                    toggleDescription(this, descriptionId);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
